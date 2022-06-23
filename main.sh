@@ -41,10 +41,18 @@ function createRouteTable () {
 
     if [ $route_table_id != "" ]
     then
-        $(aws ec2 create-route --route-table-id $route_table_id --destination-cidr-block 0.0.0.0/0)
-        $(aws ec2 associate-route-table --route-table-id $route_table_id --subnet-id $subnet_id)
+       # $(aws ec2 create-route --route-table-id $route_table_id --destination-cidr-block 10.0.0.0/16 --)
+        $(aws ec2 create-route --route-table-id $route_table_id --destination-cidr-block 0.0.0.0/0 --gateway-id $1)
+        $(aws ec2 associate-route-table --route-table-id $route_table_id --subnet-id $2)
     fi
+
 }
+
+function createNatGateway () {
+    $(aws ec2 create-nat-gateway --subnet-id $1 )
+}
+
+
 
 
 
