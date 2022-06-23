@@ -36,6 +36,16 @@ function createInternetGateway () {
     echo "Internet Gateway create with success: " $internetGateway_id "And its a assiciated with: " $associated_vpc_id
 }
 
+function createRouteTable () {
+    route_table_id=$(aws ec2 create-route-table --vpc-id $vpc_id --query "RouteTable.RouteTableId" --output text)
+
+    if [ $route_table_id != "" ]
+    then
+        $(aws ec2 create-route --route-table-id $route_table_id --destination-cidr-block 0.0.0.0/0)
+        $()
+    fi
+}
+
 
 
 echo "###############################################"
