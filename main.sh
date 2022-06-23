@@ -42,7 +42,7 @@ function createRouteTable () {
     if [ $route_table_id != "" ]
     then
         $(aws ec2 create-route --route-table-id $route_table_id --destination-cidr-block 0.0.0.0/0)
-        $()
+        $(aws ec2 associate-route-table --route-table-id $route_table_id --subnet-id $subnet_id)
     fi
 }
 
